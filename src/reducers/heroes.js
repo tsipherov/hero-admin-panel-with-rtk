@@ -1,37 +1,41 @@
 import { createReducer } from "@reduxjs/toolkit";
 
 import {
-    heroesFetching,
-    heroesFetched,
-    heroesFetchingError,
-    heroCreated,
-    heroDeleted
-} from '../actions';
+  heroesFetching,
+  heroesFetched,
+  heroesFetchingError,
+  heroCreated,
+  heroDeleted,
+} from "../actions";
 
 const initialState = {
-    heroes: [],
-    heroesLoadingStatus: 'idle'
-}
+  heroes: [],
+  heroesLoadingStatus: "idle",
+};
 
-const heroes = createReducer(initialState, {
-    [heroesFetching]: state => {state.heroesLoadingStatus = 'loading'},
+const heroes = createReducer(
+  initialState,
+  {
+    [heroesFetching]: (state) => {
+      state.heroesLoadingStatus = "loading";
+    },
     [heroesFetched]: (state, action) => {
-                    state.heroesLoadingStatus = 'idle';
-                    state.heroes = action.payload;
-                },
-    [heroesFetchingError]: state => {
-                    state.heroesLoadingStatus = 'error';
-                },
+      state.heroesLoadingStatus = "idle";
+      state.heroes = action.payload;
+    },
+    [heroesFetchingError]: (state) => {
+      state.heroesLoadingStatus = "error";
+    },
     [heroCreated]: (state, action) => {
-                    state.heroes.push(action.payload);
-                },
+      state.heroes.push(action.payload);
+    },
     [heroDeleted]: (state, action) => {
-                    state.heroes = state.heroes.filter(item => item.id !== action.payload);
-                }
-        },
-    [],
-    state => state
-)
+      state.heroes = state.heroes.filter((item) => item.id !== action.payload);
+    },
+  },
+  [],
+  (state) => state
+);
 
 // const heroes = createReducer(initialState, builder => {
 //     builder
@@ -77,7 +81,7 @@ const heroes = createReducer(initialState, {
 //                 ...state,
 //                 heroes: [...state.heroes, action.payload]
 //             }
-//         case 'HERO_DELETED': 
+//         case 'HERO_DELETED':
 //             return {
 //                 ...state,
 //                 heroes: state.heroes.filter(item => item.id !== action.payload)
@@ -86,4 +90,4 @@ const heroes = createReducer(initialState, {
 //     }
 // }
 
-export default heroes;
+// export default heroes;
