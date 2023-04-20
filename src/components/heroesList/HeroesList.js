@@ -6,15 +6,16 @@ import { createSelector } from "@reduxjs/toolkit";
 import HeroesListItem from "../heroesListItem/HeroesListItem";
 import Spinner from "../spinner/Spinner";
 import { useHttp } from "../../hooks/http.hook";
-import { heroDeleted, fetchHeroes } from "./heroesSlice";
+import { heroDeleted, fetchHeroes, selectAll } from "./heroesSlice";
 
 import "./heroesList.scss";
 
 const HeroesList = () => {
   const filteredHeroesSelector = createSelector(
     (state) => state.filters.activeFilter,
-    (state) => state.heroes.heroes,
+    selectAll,
     (filter, heroes) => {
+      console.log("heroes >>> ", heroes);
       if (filter === "all") {
         return heroes;
       } else {
@@ -24,6 +25,7 @@ const HeroesList = () => {
   );
 
   const filteredHeroes = useSelector(filteredHeroesSelector);
+
   const heroesLoadingStatus = useSelector(
     (state) => state.heroes.heroesLoadingStatus
   );
@@ -71,7 +73,7 @@ const HeroesList = () => {
   };
 
   const elements = renderHeroesList(filteredHeroes);
-  return <TransitionGroup component="ul">{elements}</TransitionGroup>;
+  return <TransitionGroup component="ul">{elements} </TransitionGroup>;
 };
 
 export default HeroesList;
