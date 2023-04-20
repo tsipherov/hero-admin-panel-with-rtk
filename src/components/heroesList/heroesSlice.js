@@ -6,11 +6,8 @@ import {
 import { useHttp } from "../../hooks/http.hook";
 
 const heroesAdapter = createEntityAdapter();
-//   {
-//   selectId: (hero) => hero.id,
-// });
 
-export const fetchHeroes = createAsyncThunk("heroes/fetchHeroes", () => {
+export const fetchHeroes = createAsyncThunk("@@heroes/fetchHeroes", () => {
   const { request } = useHttp();
   return request("http://localhost:3001/heroes");
 });
@@ -36,7 +33,6 @@ const heroesSlice = createSlice({
       })
       .addCase(fetchHeroes.fulfilled, (state, action) => {
         heroesAdapter.setAll(state, action.payload);
-        // heroesAdapter.addMany(state, action.payload);
         state.heroesLoadingStatus = "idle";
       })
       .addCase(fetchHeroes.rejected, (state) => {
@@ -47,7 +43,6 @@ const heroesSlice = createSlice({
 
 export const { heroCreated, heroDeleted } = heroesSlice.actions;
 export const { selectAll } = heroesAdapter.getSelectors((state) => {
-  console.log("state >>> ", state);
   return state.heroes;
 });
 

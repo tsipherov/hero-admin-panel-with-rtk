@@ -17,6 +17,18 @@
       "name": "Морской герой",
       "description": "Как аквамен, но не из DC",
       "element": "water"
+    },
+    {
+      "id": "26b54381-0180-4fd1-833f-1aed967e5d26",
+      "name": "Сергій Циферов",
+      "description": "asdfaf fjfgjf",
+      "element": "earth"
+    },
+    {
+      "id": "d0a4ce6e-d14f-4404-8767-602897c7fd12",
+      "name": "tsiferov",
+      "description": "nothing",
+      "element": "earth"
     }
   ],
   "filters": [
